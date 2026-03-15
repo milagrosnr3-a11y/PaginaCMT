@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMT del Sur SAC - Excelencia Textil</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0041a3', // Azul extraído del logo
+                            red: '#e30613',  // Rojo extraído del logo
+                            dark: '#002e72',
+                            accent: '#f3f4f6'
+                        }
+                    },
+                    animation: {
+                        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+                    },
+                    keyframes: {
+                        'infinite-scroll': {
+                            from: { transform: 'translateX(0)' },
+                            to: { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 46, 114, 0.7), rgba(0, 0, 0, 0.5));
+        }
+
+        .textile-pattern {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%230041a3' fill-opacity='0.03'%3E%3Cpath fill-rule='evenodd' d='M11 0L3 0h8zm1 0h8v1h-8V0zM0 2l2 2V2H0zm0 1h2v8H0V3zm2 2h8v1H2V5zm0 1h8v1H2V6zm0 1h8v1H2V7zm0 1h8v1H2V8zm0 1h8v1H2V9zm2 2h8v1H4v-1zm0 1h8v1H4v-1zm0 1h8v1H4v-1zm0 1h8v1H4v-1zm0 1h8v1H4v-1z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .btn-brand-red {
+            background-color: #e30613;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brand-red:hover {
+            background-color: #b90510;
+            transform: translateY(-2px);
+        }
+
+        .card-vision:hover {
+            border-top: 6px solid #e30613;
+            transform: translateY(-5px);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe, .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-placeholder {
+            background-image: url('https://i.imgur.com/VwUv5AE.png');
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease;
+        }
+
+        .video-placeholder:hover img {
+            transform: scale(1.1);
+        }
+
+        .video-frame-premium {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 65, 163, 0.25);
+        }
+
+        .process-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            background-color: #f3f4f6;
+        }
+
+        .group:hover .process-img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Estilo para el scroll infinito de sellos */
+        .scroller-inner {
+            display: flex;
+            width: max-content;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="https://i.imgur.com/i4YJSPH.png" alt="Logo CMT del Sur" class="h-14 w-auto object-contain">
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="font-bold text-brand-blue hover:text-brand-red transition-colors uppercase text-sm">Inicio</a>
+                    <a href="#nosotros" class="font-bold text-brand-blue hover:text-brand-red transition-colors uppercase text-sm">Empresa</a>
+                    <a href="#video-proceso" class="font-bold text-brand-blue hover:text-brand-red transition-colors uppercase text-sm">Video</a>
+                    <a href="#servicios" class="font-bold text-brand-blue hover:text-brand-red transition-colors uppercase text-sm">Procesos</a>
+                    <a href="#certificaciones" class="font-bold text-brand-blue hover:text-brand-red transition-colors uppercase text-sm">Certificaciones</a>
+                    <a href="#contacto" class="btn-brand-red text-white px-6 py-2 rounded-md font-bold uppercase text-xs shadow-lg">Contacto</a>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-brand-blue">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-blue text-white px-4 py-6 space-y-4">
+            <a href="#inicio" class="block font-bold border-b border-blue-400 pb-2">Inicio</a>
+            <a href="#nosotros" class="block font-bold border-b border-blue-400 pb-2">Empresa</a>
+            <a href="#video-proceso" class="block font-bold border-b border-blue-400 pb-2">Video</a>
+            <a href="#servicios" class="block font-bold border-b border-blue-400 pb-2">Procesos</a>
+            <a href="#certificaciones" class="block font-bold border-b border-blue-400 pb-2">Certificaciones</a>
+            <a href="#contacto" class="block font-bold text-brand-red">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Portada (Hero Section) -->
+    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://i.imgur.com/LeK5cF8.png" class="w-full h-full object-cover" alt="Portada CMT del Sur">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl" data-aos="zoom-in">
+            <div class="mb-6 flex justify-center">
+                <img src="https://i.imgur.com/i4YJSPH.png" alt="CMT Logo White" class="h-24 md:h-32 brightness-0 invert opacity-90">
+            </div>
+            <h1 class="text-4xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-lg leading-tight">
+                CMT DEL SUR S.A.C.
+            </h1>
+            <p class="text-xl md:text-2xl text-white mb-10 font-medium max-w-3xl mx-auto opacity-90 border-t border-b border-white/20 py-4">
+                Liderando la industria textil desde Chincha con pasión y calidad de exportación.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#nosotros" class="btn-brand-red text-white px-10 py-4 rounded-md font-extrabold text-lg shadow-2xl">CONÓCENOS</a>
+                <a href="#servicios" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-10 py-4 rounded-md font-extrabold text-lg hover:bg-white hover:text-brand-blue transition-all">PROCESOS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misión y Visión -->
+    <section id="nosotros" class="py-24 textile-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-brand-red font-black uppercase tracking-widest text-sm">Nuestra Razón de Ser</span>
+                <h2 class="text-4xl font-extrabold text-brand-blue mt-2 uppercase">Misión y Visión</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white p-10 rounded-2xl shadow-xl border-l-8 border-brand-blue card-vision transition-all duration-300" data-aos="fade-right">
+                    <div class="bg-brand-blue/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-bullseye text-brand-blue text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-brand-blue mb-4 uppercase">Misión</h3>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Proveer servicios de confección textil de alta calidad (CMT), superando las expectativas de nuestros clientes nacionales e internacionales a través de procesos eficientes, tecnología de punta y el desarrollo integral de nuestro talento humano en la región de Ica.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-10 rounded-2xl shadow-xl border-l-8 border-brand-red card-vision transition-all duration-300" data-aos="fade-left">
+                    <div class="bg-brand-red/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-eye text-brand-red text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-brand-blue mb-4 uppercase">Visión</h3>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Consolidarnos para el 2030 como la empresa líder en el sector textil del sur del Perú, reconocida mundialmente por nuestra excelencia operativa, sostenibilidad ambiental y por ser un pilar fundamental en el progreso social de nuestra comunidad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video de Proceso -->
+    <section id="video-proceso" class="py-24 bg-white textile-pattern">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center justify-center px-4 py-1 mb-4 rounded-full bg-brand-red/10 text-brand-red text-xs font-black uppercase tracking-tighter">
+                    <i class="fas fa-play-circle mr-2"></i> Experiencia Multimedia
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-brand-blue uppercase tracking-tight">Video de Nuestro Proceso de Producción</h2>
+                <div class="h-1.5 w-24 bg-brand-red mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="relative group" data-aos="zoom-in-up">
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-brand-blue/5 rounded-full blur-3xl group-hover:bg-brand-blue/10 transition-colors"></div>
+                <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-brand-red/5 rounded-full blur-3xl group-hover:bg-brand-red/10 transition-colors"></div>
+                
+                <div class="relative p-3 md:p-6 rounded-[2.5rem] video-frame-premium overflow-hidden transition-all duration-500 transform group-hover:scale-[1.01]">
+                    <div id="video-wrapper" class="video-container rounded-[1.5rem] overflow-hidden shadow-inner bg-slate-200">
+                        <div class="video-placeholder" onclick="loadVideo()">
+                            <div class="bg-brand-red text-white w-20 h-20 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-brand-blue">
+                                <i class="fas fa-play text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-4 right-10 bg-brand-blue text-white px-6 py-3 rounded-xl shadow-xl font-bold text-sm hidden md:flex items-center gap-3">
+                    <div class="flex gap-1">
+                        <span class="w-2 h-2 bg-brand-red rounded-full animate-pulse"></span>
+                        <span class="w-2 h-2 bg-brand-red rounded-full animate-pulse" style="animation-delay: 0.2s"></span>
+                        <span class="w-2 h-2 bg-brand-red rounded-full animate-pulse" style="animation-delay: 0.4s"></span>
+                    </div>
+                    CALIDAD EN CADA PUNTO
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestros Procesos -->
+    <section id="servicios" class="py-24 bg-brand-blue text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-up">
+                <div class="md:w-2/3">
+                    <h2 class="text-4xl font-extrabold mb-4 uppercase">Nuestros Procesos</h2>
+                    <p class="text-blue-100/80 text-lg italic">Dominamos cada etapa de la cadena de producción textil.</p>
+                </div>
+                <div class="h-1 w-24 bg-brand-red mb-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Corte -->
+                <div class="group bg-brand-dark/50 p-6 rounded-xl hover:bg-brand-red transition-all duration-500 cursor-default" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold uppercase">Corte</h3>
+                        <i class="fas fa-scissors text-brand-red group-hover:text-white text-2xl"></i>
+                    </div>
+                    <img src="https://i.imgur.com/EoKN7Kz.png" alt="Proceso de Corte" class="process-img">
+                    <p class="text-xs opacity-80 leading-relaxed">Precisión milimétrica en el tendido y corte computarizado para optimizar mermas.</p>
+                </div>
+
+                <!-- Estampado -->
+                <div class="group bg-brand-dark/50 p-6 rounded-xl hover:bg-brand-red transition-all duration-500 cursor-default" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold uppercase">Estampado</h3>
+                        <i class="fas fa-palette text-brand-red group-hover:text-white text-2xl"></i>
+                    </div>
+                    <img src="https://i.imgur.com/E9F1Mpd.png" alt="Proceso de Estampado" class="process-img">
+                    <p class="text-xs opacity-80 leading-relaxed">Serigrafía y transfer de alta resistencia con tintas ecológicas y acabados vibrantes.</p>
+                </div>
+
+                <!-- Bordado -->
+                <div class="group bg-brand-dark/50 p-6 rounded-xl hover:bg-brand-red transition-all duration-500 cursor-default" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold uppercase">Bordado</h3>
+                        <i class="fas fa-bullseye text-brand-red group-hover:text-white text-2xl"></i>
+                    </div>
+                    <img src="https://i.imgur.com/SxUgosx.png" alt="Proceso de Bordado" class="process-img">
+                    <p class="text-xs opacity-80 leading-relaxed">Bordado computarizado multizabezal de alta definición para logotipos y aplicaciones.</p>
+                </div>
+
+                <!-- Costura -->
+                <div class="group bg-brand-dark/50 p-6 rounded-xl hover:bg-brand-red transition-all duration-500 cursor-default" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold uppercase">Costura</h3>
+                        <i class="fas fa-tshirt text-brand-red group-hover:text-white text-2xl"></i>
+                    </div>
+                    <img src="https://i.imgur.com/lJoTrj9.jpeg" alt="Proceso de Costura" class="process-img">
+                    <p class="text-xs opacity-80 leading-relaxed">Líneas de producción balanceadas para confección en serie con control de puntada.</p>
+                </div>
+
+                <!-- Lavandería -->
+                <div class="group bg-brand-dark/50 p-6 rounded-xl hover:bg-brand-red transition-all duration-500 cursor-default" data-aos="fade-up" data-aos-delay="500">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold uppercase">Lavandería</h3>
+                        <i class="fas fa-tint text-brand-red group-hover:text-white text-2xl"></i>
+                    </div>
+                    <img src="https://i.imgur.com/LScgPhg.png" alt="Proceso de Lavandería" class="process-img">
+                    <p class="text-xs opacity-80 leading-relaxed">Lavados industriales para suavizado, siliconado y control de encogimiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sellos y Certificaciones -->
+    <section id="certificaciones" class="py-20 bg-slate-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 mb-12" data-aos="fade-up">
+            <div class="flex items-center gap-4">
+                <div class="h-1 w-12 bg-brand-red"></div>
+                <h2 class="text-3xl font-black text-brand-blue uppercase tracking-tighter">Nuestros Sellos y Certificaciones</h2>
+            </div>
+            <p class="mt-4 text-slate-500 max-w-2xl font-medium">Respaldamos nuestra calidad y compromiso ético con estándares internacionales de sostenibilidad y responsabilidad social.</p>
+        </div>
+
+        <!-- Infinite Scroll Slider -->
+        <div class="relative flex overflow-x-hidden py-10 border-y border-slate-200 bg-white">
+            <div class="animate-infinite-scroll whitespace-nowrap flex items-center">
+                <!-- Certificación 1: WRAP -->
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-2 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://i.imgur.com/rJMzRsh.png" alt="Certificación WRAP" class="max-h-full w-auto object-contain">
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">WRAP</span>
+                </div>
+                <!-- Certificación 2: GOTS -->
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-2 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://i.imgur.com/buxbazq.png" alt="Certificación GOTS" class="max-h-full w-auto object-contain">
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">GOTS</span>
+                </div>
+                <!-- Certificación 3: GRS (IMAGEN ACTUALIZADA) -->
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-2 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://i.imgur.com/Adv8BjQ.png" alt="Certificación GRS" class="max-h-full w-auto object-contain">
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">GRS</span>
+                </div>
+                <!-- Certificación 4: Huella de Carbono -->
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-4 grayscale group-hover:grayscale-0 transition-all duration-500 text-cyan-500">
+                        <i class="fas fa-cloud-sun text-5xl"></i>
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">HUELLA DE CARBONO</span>
+                </div>
+
+                <!-- Duplicados para el efecto infinito -->
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-2 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://i.imgur.com/rJMzRsh.png" alt="Certificación WRAP" class="max-h-full w-auto object-contain">
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">WRAP</span>
+                </div>
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-2 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://i.imgur.com/buxbazq.png" alt="Certificación GOTS" class="max-h-full w-auto object-contain">
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">GOTS</span>
+                </div>
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-2 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://i.imgur.com/Adv8BjQ.png" alt="Certificación GRS" class="max-h-full w-auto object-contain">
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">GRS</span>
+                </div>
+                <div class="mx-12 flex flex-col items-center group">
+                    <div class="w-32 h-32 flex items-center justify-center p-4 grayscale group-hover:grayscale-0 transition-all duration-500 text-cyan-500">
+                        <i class="fas fa-cloud-sun text-5xl"></i>
+                    </div>
+                    <span class="font-black text-brand-blue text-xl">HUELLA DE CARBONO</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section class="py-24 bg-slate-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-4xl font-extrabold text-brand-blue uppercase">Nuestra Planta</h2>
+                <p class="text-slate-500 mt-2 font-bold"><i class="fas fa-map-marker-alt text-brand-red mr-2"></i> Chincha, Ica - Perú</p>
+            </div>
+            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white" data-aos="zoom-in">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.602241604085!2d-76.13689622501066!3d-13.411652486944685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x910ff6671079d859%3A0x6b445f1b1b1b1b1b!2sChincha%20Alta!5e0!3m2!1ses!2spe!4v1710000000000!5m2!1ses!2spe" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-blue rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+                <div class="md:w-2/5 bg-brand-dark p-12 text-white flex flex-col justify-center">
+                    <h2 class="text-3xl font-extrabold mb-8">Escríbenos</h2>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <i class="fas fa-phone-alt text-brand-red text-xl"></i>
+                            <div>
+                                <h5 class="font-bold">Central Telefónica</h5>
+                                <p class="text-sm opacity-70">+51 (056) 123 456</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <i class="fas fa-envelope text-brand-red text-xl"></i>
+                            <div>
+                                <h5 class="font-bold">Ventas y Consultas</h5>
+                                <p class="text-sm opacity-70">comercial@cmtdelsur.com.pe</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-3/5 p-12 bg-white">
+                    <form onsubmit="event.preventDefault(); alert('Mensaje enviado con éxito.');">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <input type="text" placeholder="Tu Nombre" class="w-full border-b-2 border-slate-200 py-3 focus:border-brand-red outline-none transition-colors" required>
+                            <input type="email" placeholder="Correo Corporativo" class="w-full border-b-2 border-slate-200 py-3 focus:border-brand-red outline-none transition-colors" required>
+                        </div>
+                        <textarea rows="4" placeholder="Detalle su requerimiento..." class="w-full border-b-2 border-slate-200 py-3 mb-8 focus:border-brand-red outline-none transition-colors" required></textarea>
+                        <button type="submit" class="btn-brand-red text-white px-12 py-4 rounded-md font-extrabold uppercase tracking-widest w-full md:w-auto shadow-xl">
+                            Enviar Solicitud
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center items-center mb-8">
+                <img src="https://i.imgur.com/i4YJSPH.png" alt="Logo Footer" class="h-16 brightness-0 invert opacity-60">
+            </div>
+            <p class="text-slate-400 text-sm font-medium uppercase tracking-[0.2em]">
+                &copy; 2024 CMT DEL SUR S.A.C. | Orgullo Peruano en Chincha
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({ duration: 1200, once: true, offset: 150 });
+
+        function loadVideo() {
+            const wrapper = document.getElementById('video-wrapper');
+            wrapper.innerHTML = `
+                <iframe 
+                    src="https://www.youtube.com/embed/qKh17-rIpwU?start=42&autoplay=1&rel=0&modestbranding=1" 
+                    title="Proceso de Producción CMT del Sur" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            `;
+        }
+    </script>
+</body>
+</html>
